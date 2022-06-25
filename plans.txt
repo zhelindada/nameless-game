@@ -1,0 +1,11 @@
+Preface
+This text should represent my vision for the game.
+I should not chase for complexity or uniqueness in the first iterations of the game. Rather, I think it's helpful to make a game of basic machanics, learn from them, then present unique games later. This first project should be a stepping stone for what's to come in the future, and not a hindrance.
+
+mechanics of the game
+This will be a top-down 2d shooter which feature a funni. This will be a roguelite adventure of the protagonist, who is on his way to gather the overdue draft from writer in his game project.
+
+top-down 2d: the world will be viewed from top to bottom, with the exclusion of z-axis.
+shooter: the protagonists will be eable to use guns (-like objects) to defeat necessary enemies.
+funni: funny (story)
+roguelite: the player is put into a random generated game space where nothing carries through to next run, except for player's persistent upgrades.
