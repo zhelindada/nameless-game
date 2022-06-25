@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7ab43c2d5c70b4aada6442489d244f, type: 3}
+  m_Name: shovel
+  m_EditorClassIdentifier: 
+  Type: 1
+  Name: shovel
+  InventoryIcon: {fileID: -2594264052573895922, guid: 2e67cba9b4c352e49882d7789b0b9fd6, type: 3}
+  WorldSprite: {fileID: -2594264052573895922, guid: 2e67cba9b4c352e49882d7789b0b9fd6, type: 3}
+  Description: A shovel.
+  _hole: {fileID: 5873492548896941411, guid: 0f780764e7a9ce74b8bb5804e6f6e83f, type: 3}
+  _distance: 2.5
+  Cooldown: 0
