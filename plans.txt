@@ -9,3 +9,14 @@ top-down 2d: the world will be viewed from top to bottom, with the exclusion of 
 shooter: the protagonists will be eable to use guns (-like objects) to defeat necessary enemies.
 funni: funny (story)
 roguelite: the player is put into a random generated game space where nothing carries through to next run, except for player's persistent upgrades.
+
+version 06.25.2022
+todo: 
+-add an enemy which moves and fights back (with basic ai)
+-add a melee weapon type
+by 06282022
+
+-add health and ammunition system
+-change so that the direction of attack is based on cursor
+-change so that the camera focal point is based on cursor
+by 0701 2022

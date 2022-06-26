@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-
+    [SerializeField] private Camera _camera;
     [SerializeField] private PlayerInteraction _playerInteraction;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerUse _playerUse;
@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
             _playerInteraction.Interact();
 
         // handling player movement
-        _playerMovement.UpdateDirection();
+        _playerMovement.UpdateDirection(_camera.ScreenToWorldPoint(Input.mousePosition) - _playerMovement.transform.position);
+        
     }
 }

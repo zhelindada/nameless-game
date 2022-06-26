@@ -51,24 +51,8 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.green;
     }
 
-    public void UpdateDirection() {
-        if (!CanMove)
-            return;
-        if (Input.GetKeyDown(KeyCode.W)) {
-            facingDirection = Vector2.up; 
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            facingDirection = Vector2.left;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            facingDirection = Vector2.down;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            facingDirection = Vector2.right;
-        }
+    public void UpdateDirection(Vector2 direction) {
+        facingDirection = direction.normalized;
     }
 
     
