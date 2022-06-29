@@ -26,7 +26,7 @@ public class Inventory
         }
         foreach (var item in itemMap)
         {
-            Debug.Log(item.Key + " " + item.Value.GetItemType());
+            /*Debug.Log(item.Key + " " + item.Value.GetItemType());*/
         }
     }
     private void Initialize(int size) {

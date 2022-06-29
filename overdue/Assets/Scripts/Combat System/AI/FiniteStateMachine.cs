@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Container for states and handling switching between states
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class FiniteStateMachine<T>
 {
     public T Owner;
@@ -23,7 +26,7 @@ public class FiniteStateMachine<T>
 
 
     public void UpdateStateMachine() {
-        Debug.Log("Updating State Machine");
+        /*Debug.Log("Updating State Machine");*/
         currentState.UpdateState(Owner);
     }
 }

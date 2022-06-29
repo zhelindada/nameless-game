@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
         }
 
         // handling player use item
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetMouseButtonDown(0)) {
             _playerUse.UseItem();
         }
 

@@ -45,6 +45,9 @@ TagManager:
   - name: Ground
     uniqueID: 1144430901
     locked: 0
+  - name: Shadow
+    uniqueID: 3713651453
+    locked: 0
   - name: WorldObjects
     uniqueID: 1673704185
     locked: 0

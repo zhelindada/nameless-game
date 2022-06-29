@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    public float damage;
+
     private static int counter;
     private Collider2D collider2d;
     private Collider2D[] hits = new Collider2D[10];
     private ContactFilter2D filter;
+
 
     [SerializeField] private Sprite projectileSprite;
     [SerializeField] private Vector2 travelDirection;
@@ -59,7 +63,6 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log("Projectile: OnCollisionEnter2D " + collision.collider.name);
         if (collision.collider.gameObject.TryGetComponent(out Collidable collidable)) {
-            Debug.Log("Proj");
             OnHit();
         }
     }

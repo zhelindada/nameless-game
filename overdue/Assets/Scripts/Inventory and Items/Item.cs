@@ -24,7 +24,7 @@ public class Item
     }
 
     public void OnUse(Vector2 playerPosition, Vector2 targetPosition) {
-        Debug.Log("Item: used item of type " + GetType() + " at " + targetPosition);
+        /*Debug.Log("Item: used item of type " + GetType() + " at " + targetPosition);*/
         data.OnUse(playerPosition, targetPosition);
     }
     public void OnPickUp() {

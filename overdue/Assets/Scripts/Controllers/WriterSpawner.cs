@@ -5,7 +5,7 @@ using UnityEngine;
 public class WriterSpawner : MonoBehaviour
 {
     [SerializeField]
-    public static bool IsDead = false;
+    public static bool IsDead = true;
 
     public GameObject writerPrefab;
     public Vector2[] spawnPoints;
@@ -21,7 +21,7 @@ public class WriterSpawner : MonoBehaviour
     {
         foreach (var point in spawnPoints)
         {
-            if (currentSpawnCooldown <= 0) {
+            if (currentSpawnCooldown <= 0 && IsDead) {
                 writerPrefab.transform.position = point;
                 Instantiate(writerPrefab);
 

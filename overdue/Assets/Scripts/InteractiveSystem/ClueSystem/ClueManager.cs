@@ -12,9 +12,10 @@ public class ClueManager : MonoSingleton<ClueManager>
         Init();
         allClueDatas = new List<ClueData>();
         foundClues = new List<ClueData>();
-        foreach (ClueData clue in Resources.LoadAll("Clue Datas", typeof(ClueData))) {
+
+        /*foreach (ClueData clue in Resources.LoadAll("Clue Datas", typeof(ClueData))) {
             Debug.Log("Clue loaded: " + clue);
-        }
+        }*/
     }
 
     public bool AddNewFoundClue(int index) {
