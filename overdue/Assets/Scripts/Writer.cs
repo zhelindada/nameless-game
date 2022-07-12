@@ -31,9 +31,9 @@ public class Writer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent(out Projectile proj)) {
-            /*Debug.Log("Writer collided with projectile");*/
-            entity.TakeDamage(proj.damage);
+        if (collision.collider.TryGetComponent(out DamageCollider proj)) {
+            Debug.Log("Writer collided with projectile");
+            entity.TakeDamage(proj.GetDamageAmount());
         }
     }
     public void DropStuff() {

@@ -33,7 +33,7 @@ public class Collidable : MonoBehaviour
             Collider2D c = hits[i];
             if (c == null)
                 continue;
-            if (c.TryGetComponent(out Projectile hitter))
+            if (c.TryGetComponent(out DamageCollider hitter))
             {
                 OnHit();
             }

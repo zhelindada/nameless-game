@@ -15,7 +15,7 @@ public class GunData : ItemData
     {
         GameObject oj = Instantiate(_projectile, parent: GameObject.Find("Projectiles").transform);
         oj.transform.position = loc + dir;
-        Projectile proj = oj.GetComponent<Projectile>();
+        DamageCollider proj = oj.GetComponent<DamageCollider>();
         proj.SetTravelDirection(dir);
     }
 }

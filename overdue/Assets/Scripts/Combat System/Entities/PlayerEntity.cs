@@ -7,8 +7,9 @@ public class PlayerEntity : Entity
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.TryGetComponent<DamageMelee>(out DamageMelee dmg)) {
-            TakeDamage(dmg.damage);
+        if(collision.collider.TryGetComponent<DamageCollider>(out DamageCollider dmg)) {
+            if(dmg.DamagesPlayer)
+                TakeDamage(dmg.GetDamageAmount());
         }
     }
 
@@ -24,5 +25,10 @@ public class PlayerEntity : Entity
     public override void TakeDamage(float dmg)
     {
         
+    }
+
+    public override void GetHitBy(DamageCollider dmg)
+    {
+        throw new System.NotImplementedException();
     }
 }

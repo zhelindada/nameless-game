@@ -43,14 +43,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8612732292210863442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62876605f7625f14996797be3fad6b64, type: 3}
+  m_Script: {fileID: 11500000, guid: 440c4ce1c25ef034886c1b09fb792101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  projectileSprite: {fileID: 5740453210667488706, guid: 77b7d983858c7d74d9aac815c22b8de2, type: 3}
-  travelDirection: {x: 0, y: 0}
-  projectileSpeed: 5
-  travelDistance: 20
+  DamagesPlayer: 0
+  _collider2d: {fileID: 0}
+  _objectSprite: {fileID: 0}
+  _sourceEntity: {fileID: 0}
+  _disappearTypes: 0000000001000000
+  _dmgAmount: 10
+  _hitTriggerTime: 1
+  _travelDistance: 20
+  _travelDirection: {x: 0, y: 0}
+  _projectileSpeed: 5
+  _disappearTime: 9999
+  _damageTime: 9999
 --- !u!212 &2683634793735864482
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,7 +96,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1673704185
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 5740453210667488706, guid: 77b7d983858c7d74d9aac815c22b8de2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -112,7 +119,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

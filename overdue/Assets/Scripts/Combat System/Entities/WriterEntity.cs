@@ -79,6 +79,7 @@ public class WriterEntity : Entity
         Vector2 moveVec = new Vector2(target.x - transform.position.x, target.y - transform.position.y).normalized * Time.deltaTime * _speed;
         Vector3 newLoc = transform.position + new Vector3(moveVec.x, moveVec.y);
         transform.position = newLoc;
+        
     }
 
     public override void Attack(Vector2 target)
@@ -109,6 +110,10 @@ public class WriterEntity : Entity
         currentAttackCooldown = _attackCooldown;
         Attack(target.transform.position);
     }
+    public override void GetHitBy(DamageCollider dmg)
+    {
+        base.GetHitBy(dmg);
+    }
     public void MoveTowardsPlayer()
     {
         Debug.Log("Writer moves towards player");
@@ -121,6 +126,5 @@ public class WriterEntity : Entity
         Attack(t.position);
     }
 
-    public void RegisterOnTakeDamage(){
-    }
+
 }

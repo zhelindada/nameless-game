@@ -22,6 +22,9 @@ public abstract class Entity : MonoBehaviour
     public abstract void MoveTowards(Vector2 target);
     public abstract void Attack(Vector2 target);
     public abstract void Attack(Entity target);
+    public virtual void GetHitBy(DamageCollider dmg) {
+        TakeDamage(dmg.GetDamageAmount());
+    }
     public float GetMaxHealth() {
         return maxHealth;
     }

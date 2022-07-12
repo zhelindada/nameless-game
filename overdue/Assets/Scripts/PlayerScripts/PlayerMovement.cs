@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
-
+    
     private Transform _playerTransform;
     private Rigidbody2D rigidbody2d;
     private Collider2D collider2d;
@@ -27,23 +27,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
+        //if(CanMove)
         //MoveByTransform();
     }
     private void FixedUpdate()
     {
-        MoveByRigidBody();
-    }
-
-    private void MoveByRigidBody() {
-
-        Vector2 movement = new Vector2(_speed * Input.GetAxisRaw("Horizontal"), _speed * Input.GetAxisRaw("Vertical"));
-        rigidbody2d.velocity = movement;
-    }
-
-    private void MoveByTransform() {
-        Vector3 deltaLoc = new Vector3(_speed * Input.GetAxisRaw("Horizontal"), _speed * Input.GetAxisRaw("Vertical"), 0) * Time.deltaTime;
-        Vector3 newLoc = _playerTransform.position + deltaLoc;
-        _playerTransform.position = newLoc;
+        CanMove = !GetComponent<PlayerAbility>().IsDashing;
     }
 
     private void OnDrawGizmos()
@@ -55,5 +44,13 @@ public class PlayerMovement : MonoBehaviour
         facingDirection = direction.normalized;
     }
 
-    
+    public void OnMove(float horizontal, float vertical)
+    {
+        if (!CanMove)
+            return;
+        Vector2 move = new Vector2(horizontal, vertical) * _speed;
+        rigidbody2d.velocity = move;
+    }
+
+
 }
