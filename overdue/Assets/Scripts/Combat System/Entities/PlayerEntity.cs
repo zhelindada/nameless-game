@@ -1,9 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerEntity : Entity
 {
+
+    public Action OnTakeDamage;
+    public Action OnDeath;
+
+    private void Awake()
+    {
+        health = maxHealth;
+    }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -19,16 +28,37 @@ public class PlayerEntity : Entity
     
     public override void Die()
     {
+        OnDeath?.Invoke();
+        Debug.Log("Game Over - The Player Dies");
+        GameManager.Instance.PlyrResCorStarter();
 
+
+        gameObject.SetActive(false);
     }
 
     public override void TakeDamage(float dmg)
     {
-        
+        Debug.Log("PlayerEntity - player taking damage");
+        health -= dmg;
+        OnTakeDamage?.Invoke();
+        if (health <= 0)
+            Die();
     }
 
     public override void GetHitBy(DamageCollider dmg)
     {
-        throw new System.NotImplementedException();
+        if (!dmg.DamagesPlayer)
+            return;
+        _invincibilityTimer = invincibleTime;
+        TakeDamage(dmg.GetDamageAmount());
     }
+
+    public void HealBy(float f) {
+        health += f;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
+
 }

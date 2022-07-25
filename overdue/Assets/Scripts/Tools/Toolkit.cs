@@ -31,15 +31,27 @@ public static class Toolkit
     public static Entity FindClosestEnemy(Vector3 fromPos) {
         // TODO check
         Dictionary<Entity, float> doe = GetEntityDistanceMap(fromPos);
+        Debug.Log("TOOLKIT: MAP size " + doe.Count);
         Entity loweste = null;
         float lowest = float.MaxValue;
         foreach (KeyValuePair<Entity, float> kfp in doe)
         {
-            if(kfp.Key.name.Equals("Player"))
+            if (kfp.Key.name.Equals("Player"))
+                continue;
             if (kfp.Value < lowest) {
                 lowest = kfp.Value;
                 loweste = kfp.Key;
             }
+        }
+
+        if (loweste == null)
+        {
+
+            Debug.Log("TOOLKIT: Closest Enemy is null");
+        }
+        else
+        {
+            Debug.Log("TOOLKIT: Closest Enemy is at " + loweste.transform.position);
         }
         return loweste;
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WriterEntity : Entity
 {
+    [SerializeField] private GameObject go;
     [SerializeField] private Writer writer;
 
     [SerializeField] private GameObject _attackObject;
@@ -35,6 +36,7 @@ public class WriterEntity : Entity
     {
         base.Awake();
 
+        go = gameObject;
         writer = GetComponent<Writer>();
         
         if (AI == null)
@@ -43,6 +45,7 @@ public class WriterEntity : Entity
     }
     private void Update()
     {
+        base.Update();
         currentAttackCooldown -= Time.deltaTime;
 
         UpdateLogicVariables();
@@ -53,7 +56,14 @@ public class WriterEntity : Entity
     }
     private void UpdateLogicVariables()
     {
-        Transform t = GameObject.Find("Player").transform;
+        GameObject go = GameObject.Find("Player");
+        if(go == null) 
+        {
+            AI.playerInDetectionRange = false;
+            return;
+        }
+
+        Transform t = go.transform;
         AI.playerInDetectionRange = (t.position - transform.position).magnitude < _detectionRange;
         AI.playerInAttackRange = (t.position - transform.position).magnitude < _attackRange;
         AI.attackOnCooldown = currentAttackCooldown > 0;
@@ -125,6 +135,8 @@ public class WriterEntity : Entity
         Transform t = GameObject.Find("Player").transform;
         Attack(t.position);
     }
+
+
 
 
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2509396112861948191}
   - component: {fileID: 2509396112861948190}
   - component: {fileID: 2509396112861948189}
-  - component: {fileID: 2509396112861948177}
+  - component: {fileID: 2064395619781581258}
   m_Layer: 0
   m_Name: Writer Attack Melee
   m_TagString: Untagged
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 861611469
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 5740453210667488706, guid: 77b7d983858c7d74d9aac815c22b8de2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0153114535, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,9 +130,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1875, y: 0.1875}
+  m_Size: {x: 0.1568771, y: 0.1875}
   m_EdgeRadius: 0
---- !u!114 &2509396112861948177
+--- !u!114 &2064395619781581258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,11 +141,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2509396112861948188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42692dd0721f27740a211e026de2f286, type: 3}
+  m_Script: {fileID: 11500000, guid: 440c4ce1c25ef034886c1b09fb792101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagingPlayer: 1
-  damagingEnemy: 0
-  damage: 15
-  persistenceTime: 1.5
-  currentTime: 0
+  DamagesPlayer: 1
+  _remainingHitTimeCounter: 0
+  _remainingTravelDistance: 0
+  _disappearTimer: 0
+  _damageTimer: 0
+  _collider2d: {fileID: 0}
+  _objectSprite: {fileID: 0}
+  _sourceEntity: {fileID: 0}
+  _disappearTypes: 02000000
+  _dmgAmount: 1250
+  _hitTriggerTime: 0
+  _travelDistance: 0
+  _travelDirection: {x: 0, y: 0}
+  _projectileSpeed: 0
+  _disappearTime: 1.5
+  _damageTime: 1.5

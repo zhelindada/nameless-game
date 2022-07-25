@@ -7,12 +7,12 @@ public class PlayerAbility : MonoBehaviour
 
     // priv f
     [SerializeField] private float _skillSoftCooldownTimer;
-    [SerializeField] private int _skillCurrentCharge;
     [SerializeField] private float _skillCooldownTimer;
+    [SerializeField] private int _skillCurrentCharge;
 
-    private float _burstSoftCooldownTimer;
-    private float _burstCooldownTimer;
-    private int _burstCurrentCharge;
+    [SerializeField] private float _burstSoftCooldownTimer;
+    [SerializeField] private float _burstCooldownTimer;
+    [SerializeField] private int _burstCurrentCharge;
 
     // priv ser f
     [SerializeField] private float _skilldashDistance;
@@ -34,16 +34,20 @@ public class PlayerAbility : MonoBehaviour
     [SerializeField] private float _skillLandingDeceleration;
     [SerializeField] private float _skillLandingTime;
 
+    [SerializeField] private GameObject _burstInitialDamageCollider;
+    [SerializeField] private GameObject _burstFollowUpDamageCollider;
+    [SerializeField] private float _burstInitialPauseInterval;
+    [SerializeField] private float _burstFollowUpInterval;
+    [SerializeField] private float _burstMaxDistance;
+
     // prefab ref
     [SerializeField] GameObject _skill_sssakura;
 
     // events
     public event System.Action OnSkillChargeChange;
 
-    // public properties
+    #region properties
     public bool IsDashing { get { return _skillSoftCooldownTimer > 0; } }
-
-    // for UI use
     public float SkillSoftCooldownTimer { get { return _skillSoftCooldownTimer; } }
     public float SkillSoftCooldownTimer01 { get { return _skillSoftCooldownTimer / _skillSoftCooldown; } }
     public float SkillCooldownTimer { get { return _skillCooldownTimer; } }
@@ -55,17 +59,17 @@ public class PlayerAbility : MonoBehaviour
             OnSkillChargeChange?.Invoke();
         }
     }
-
     public int SkillMaxCharge { get { return _skillMaxCharge; } }
     public float BurstSoftCooldownTimer { get { return _burstSoftCooldownTimer; } }
     public float BurstSoftCooldownTimer01 { get { return _burstSoftCooldownTimer / _burstSoftCooldown; } }
     public float BurstCooldownTimer { get { return _burstCooldownTimer; } }
-    public float BurstCooldownTimer01 { get { return _burstCooldownTimer / _skillCooldown; } }
+    public float BurstCooldownTimer01 { get { return _burstCooldownTimer / _burstCooldown; } }
     public int BurstCurrentCharge { 
         get { return _burstCurrentCharge; } 
         private set{ _burstCurrentCharge = value; } 
     }
     public int BurstMaxCharge { get { return _burstMaxCharge; } }
+    #endregion properties
 
     // overriden private methods
     private void Awake()
@@ -98,8 +102,7 @@ public class PlayerAbility : MonoBehaviour
     }
     // private methods
     private IEnumerator SkillDash(Vector2 dir) {
-
-        // physics and collision prep
+        #region collision
         ContactFilter2D cf = new ContactFilter2D();
         cf.layerMask = LayerMask.GetMask("WorldObjects");
 
@@ -117,32 +120,20 @@ public class PlayerAbility : MonoBehaviour
 
         Vector2 totalTravel = dir * _skilldashDistance;
         Vector3 finalPosition = transform.position + new Vector3(totalTravel.x, totalTravel.y, 0);
-
-        // pre skill
+        #endregion collision
+        #region pre
         yield return null;
         _skillSoftCooldownTimer = _skilldashTime;
-
-        // TODO: blink (part 1)
+        #endregion pre
+        #region blink
         Vector3 posChangeBlink = blinkEndDistance * dir;
         gameObject.transform.position = gameObject.transform.position + posChangeBlink;
-        
-        /*
-        if (dir.magnitude > _skillLandingDistance)
-        {
-            Vector3 blinkPosChange = (dir.magnitude - _skillLandingDistance) * dir.normalized;
-            gameObject.transform.position = gameObject.transform.position + blinkPosChange;
-        }
-        else {
-            Vector3 blinkPosChange = (dir.magnitude - _skillLandingDistance) * dir.normalized;
-            gameObject.transform.position = gameObject.transform.position + blinkPosChange;
-        }
-        */
-
-        // spawn sss (p2)
+        #endregion blink
+        #region spawn SSS
         SeishouSakura.AssignGO(_skill_sssakura);
         SeishouSakura.MakeNewSSS(GameObject.Find("Skill Entities").transform, gameObject.transform.position);
-
-        // TODO: landing (p3)
+        #endregion spawn SSS
+        #region landing
         float vland = _skillLandingMaxSpeed;
         float aland = vland / _skillLandingTime;
         while (vland >= 0) {
@@ -154,24 +145,47 @@ public class PlayerAbility : MonoBehaviour
 
             yield return null;
         }
-        // post skill
+        #endregion landing
+        #region post 
         _skillSoftCooldownTimer = 0;
         Debug.Log("Dash Termination");
+        #endregion post
     }
 
     private IEnumerator Burst(Vector2 dir) {
+        #region collision prep
+        Entity target = Toolkit.FindClosestEnemy(transform.position);
+        Vector3 targetPosition;
+        if (target != null)
+            targetPosition = target.transform.position;
+        else
+            targetPosition = new Vector3(float.MaxValue, float.MaxValue);
+
+        #endregion collision prep
+        if ((targetPosition - transform.position).magnitude > _burstMaxDistance) {
+            targetPosition = transform.position + new Vector3(dir.x, dir.y, 0).normalized * _burstMaxDistance;
+        }
         yield return null;
+        GameObject ini = Instantiate(_burstInitialDamageCollider);
+        ini.transform.position = targetPosition;
+        int count = SeishouSakura.currentNum;
+        SeishouSakura.DestroyAllSSS();
+
+        yield return new WaitForSeconds(_burstInitialPauseInterval);
+
+        for (int i = count; i > 0; i--) {
+            GameObject o = Instantiate(_burstFollowUpDamageCollider);
+            o.transform.position = targetPosition;
+            yield return new WaitForSeconds(_burstFollowUpInterval);
+        }
     }
-
-
     // public methods
     public void UseSkill(Vector2 dir) {
 
         if (_skillCurrentCharge < 1) {
             return;
         }
-
-        // initiation
+        
         StartCoroutine("SkillDash", dir);
         SkillCurrentCharge --;
     }

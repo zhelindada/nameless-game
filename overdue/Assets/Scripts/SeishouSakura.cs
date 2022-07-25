@@ -7,8 +7,9 @@ public class SeishouSakura : MonoBehaviour
 
     // static variables
     public static int maxNumSSS = 3;
+    public static int currentNum = 0;
     private static int nextReuseCounter = 0;
-    private static GameObject[] allSSS;
+    private static GameObject[] allSSS = new GameObject[maxNumSSS];
     private static GameObject ssSakura;
 
     [SerializeField] private DamageCollider _damage;
@@ -29,7 +30,7 @@ public class SeishouSakura : MonoBehaviour
     {
         despawnTimer -= Time.deltaTime;
         if (despawnTimer < 0) {
-            gameObject.SetActive(false);
+            TurnOff();
         }
         attackTimer -= Time.deltaTime;
         if (attackTimer < 0)
@@ -49,12 +50,18 @@ public class SeishouSakura : MonoBehaviour
         newS.transform.position = target;
     }
 
+    private void TurnOff() {
+        currentNum--;
+        gameObject.SetActive(false);
+    }
+
     private static void CountUp()
     {
         nextReuseCounter++;
         if (nextReuseCounter >= maxNumSSS) {
             nextReuseCounter -= maxNumSSS;
         }
+        currentNum++;
     }
 
     public static void MakeNewSSS(Transform parent, Vector3 position) {
@@ -86,5 +93,15 @@ public class SeishouSakura : MonoBehaviour
     public static void AssignGO(GameObject go) {
         if(ssSakura == null)
             ssSakura = go;
+    }
+    public static void DestroyAllSSS() {
+        foreach (GameObject go in allSSS) {
+            if (go == null)
+                continue;
+            if (!go.activeInHierarchy)
+                continue;
+            SeishouSakura sss = go.GetComponent<SeishouSakura>();
+            sss.TurnOff();
+        }
     }
 }

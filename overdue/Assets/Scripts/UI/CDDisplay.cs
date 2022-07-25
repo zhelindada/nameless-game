@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CDDisplay : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CDDisplay : MonoBehaviour
     [SerializeField] private SkillChargesDisplayUI _skillCharge;
     [SerializeField] private SkillChargesDisplayUI _burstCharge;
 
+    [SerializeField] private Slider _skillFill;
+    [SerializeField] private Slider _burstFill;
+
     private void Awake()
     {
         
@@ -19,12 +23,8 @@ public class CDDisplay : MonoBehaviour
 
     private void Update()
     {
-        // TODO: update cooldown for skill
-        RectTransform p = _skillRT.parent as RectTransform;
-        float skillSize = p.rect.height;
-        _skillRT.anchoredPosition = new Vector2(_skillRT.anchoredPosition.x, _abilities.SkillCooldownTimer01 * skillSize);
-
-        // TODO: update cooldown for burst
+        _skillFill.value = _abilities.SkillCooldownTimer01;
+        _burstFill.value = _abilities.BurstCooldownTimer01;
     }
 
 }

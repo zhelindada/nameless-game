@@ -51,6 +51,9 @@ TagManager:
   - name: WorldObjects
     uniqueID: 1673704185
     locked: 0
+  - name: Damage
+    uniqueID: 4023731225
+    locked: 0
   - name: UI
     uniqueID: 861611469
     locked: 0

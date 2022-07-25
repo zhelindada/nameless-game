@@ -190,14 +190,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1e8abadf5eace4fb0e8b56b0f5326d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testing: 0
+  _invincibilityTimer: 0
   maxHealth: 180
+  invincibleTime: 0
+  go: {fileID: 0}
   writer: {fileID: 0}
   _attackObject: {fileID: 2509396112861948188, guid: 1e9f1f375312dd74396f5e17370b2371, type: 3}
   _attackObjectSpawnDistance: 1.5
   _detectionRange: 15
   _attackRange: 2
   _speed: 1
-  _attackCooldown: 5
+  _attackCooldown: 2.5
   _state: 
 --- !u!1001 &1910048809597212718
 PrefabInstance:
